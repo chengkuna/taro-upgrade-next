@@ -11,32 +11,43 @@
   ],
   "activationEvents": [
     "onCommand:taro-upgrade-next.TaroUpgradeImport",
-    "onCommand:taro-upgrade-next.TaroUpgradeConfig"
+    "onCommand:taro-upgrade-next.TaroUpgradeConfig",
+    "onCommand:taro-upgrade-next.TaroUpgradeCssModule"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-      "command": "taro-upgrade-next.TaroUpgradeImport",
-      "title": "Taro upgrade import"
+        "command": "taro-upgrade-next.TaroUpgradeImport",
+        "title": "Taro upgrade import"
       },
       {
-      "command": "taro-upgrade-next.TaroUpgradeConfig",
-      "title": "Taro upgrade config"
+        "command": "taro-upgrade-next.TaroUpgradeConfig",
+        "title": "Taro upgrade config"
+      },
+      {
+        "command": "taro-upgrade-next.TaroUpgradeCssModule",
+        "title": "Taro upgrade CSS-Module"
       }
     ],
     "keybindings": [
       {
-      "key": "ctrl+alt+f10",
-      "mac": "cmd+alt+f10",
-      "command": "taro-upgrade-next.TaroUpgradeImport",
-      "when": "editorTextFocus"
+        "key": "ctrl+alt+f5",
+        "mac": "cmd+alt+f5",
+        "command": "taro-upgrade-next.TaroUpgradeImport",
+        "when": "editorTextFocus"
       },
       {
-      "key": "ctrl+alt+f9",
-      "mac": "cmd+alt+f9",
-      "command": "taro-upgrade-next.TaroUpgradeConfig",
-      "when": "editorTextFocus"
+        "key": "ctrl+alt+f6",
+        "mac": "cmd+alt+f6",
+        "command": "taro-upgrade-next.TaroUpgradeConfig",
+        "when": "editorTextFocus"
+      },
+      {
+        "key": "ctrl+alt+f7",
+        "mac": "cmd+alt+f7",
+        "command": "taro-upgrade-next.TaroUpgradeCssModule",
+        "when": "editorTextFocus"
       }
     ]
     },
