@@ -9,25 +9,18 @@ import * as vscode from 'vscode';
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-  // Use the console to output diagnostic information (console.log) and errors (console.error)
-  // This line of code will only be executed once when your extension is activated
-  // const config = vscode.workspace.findFiles('*.ts');
   console.log('Congratulations, your extension "taro-upgrade-next" is now active!');
-
-  // The command has been defined in the package.json file
-  // Now provide the implementation of the command with registerCommand
-  // The commandId parameter must match the command field in package.json
   let handleTaroImport = vscode.commands.registerCommand('taro-upgrade-next.TaroUpgradeImport', () => {
-    // The code you place here will be executed every time your c
     startFormatImport();
-    // const message = 'Hello VS Code';
-    // vscode.window.showInformationMessage(message);
   });
 
-  let handleTaroConf = vscode.commands.registerCommand('taro-upgrade-next.TaroUpgradeConfig', () => {});
+  /* let handleTaroConf = vscode.commands.registerCommand('taro-upgrade-next.TaroUpgradeConfig', () => {
+
+    startFormatConfig();
+  }); */
 
   context.subscriptions.push(handleTaroImport);
-  context.subscriptions.push(handleTaroConf);
+  // context.subscriptions.push(handleTaroConf);
 }
 
 /* 
@@ -35,27 +28,42 @@ export function activate(context: vscode.ExtensionContext) {
  import Taro, { useState } from '@tarojs/taro' => import React, { useState } from 'react'
 */
 function startFormatImport() {
-  const fileType = ['typescript', 'typescriptreact'];
   const editor = vscode.window.activeTextEditor;
   if (!editor) {
     return;
   }
 
-  const currentLanguageId = editor?.document.languageId;
-  const isValidFile = currentLanguageId && fileType.includes(currentLanguageId);
-  if (isValidFile) {
-    replaceTaroText(editor);
-  } else {
-    vscode.window.showErrorMessage('仅支持tsx,ts文件');
+  // const isValidFile = verifyFileType(editor?.document.languageId)
+  if (verifyFileType(editor?.document.languageId)) {
+    const newEditorText = replaceImportText(editor.document);
+    coverDocumentText(editor, newEditorText);
   }
 }
 
-function replaceTaroText(editor: vscode.TextEditor) {
-  const newEditorText = formatEditorText(editor.document);
-  coverDocumentText(editor, newEditorText);
+function startFormatConfig() {
+  // [a-zA-Z0-9]+.config[\s]*=[\s]*\{[\s\S\n]*?\}
+  const editor = vscode.window.activeTextEditor;
+  if (!editor) {
+    return;
+  }
+
+  if (verifyFileType(editor?.document.languageId)) {
+    const newEditorText = replaceConfigText(editor.document);
+    coverDocumentText(editor, newEditorText);
+  }
 }
 
-function formatEditorText(document: vscode.TextDocument) {
+function verifyFileType(languageId: string, showError = true) {
+  const fileType = ['typescript', 'typescriptreact', 'javascript', 'javascriptreact'];
+  const isValidFile = languageId && fileType.includes(languageId);
+
+  if (!isValidFile) {
+    vscode.window.showErrorMessage('仅支持tsx,ts文件');
+  }
+  return isValidFile
+}
+
+function replaceImportText(document: vscode.TextDocument) {
   const taroHooksMeta = [
     'useDidShow',
     'useDidHide',
@@ -112,6 +120,14 @@ function formatEditorText(document: vscode.TextDocument) {
 
     return documentText;
   }
+}
+
+function replaceConfigText(document: vscode.TextDocument) {
+  let documentText = document.getText()
+
+  const reg = /[a-zA-Z0-9]+.config[\s]*=[\s]*\{[\s\S\n]*?\}/
+  documentText = documentText.replace(reg, '')
+  return documentText
 }
 
 // 覆盖完整页面

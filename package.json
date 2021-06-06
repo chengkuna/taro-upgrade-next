@@ -32,7 +32,7 @@
         "when": "editorTextFocus"
       },
       {
-        "key": "ctrl+alt+f9",
+        "key": "ctrl+shift+alt+f9",
         "mac": "cmd+alt+f9",
         "command": "taro-upgrade-next.TaroUpgradeConfig",
         "when": "editorTextFocus"
