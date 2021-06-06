@@ -14,13 +14,13 @@ export function activate(context: vscode.ExtensionContext) {
     startFormatImport();
   });
 
-  /* let handleTaroConf = vscode.commands.registerCommand('taro-upgrade-next.TaroUpgradeConfig', () => {
+  let handleTaroConf = vscode.commands.registerCommand('taro-upgrade-next.TaroUpgradeConfig', () => {
 
     startFormatConfig();
-  }); */
+  });
 
   context.subscriptions.push(handleTaroImport);
-  // context.subscriptions.push(handleTaroConf);
+  context.subscriptions.push(handleTaroConf);
 }
 
 /* 

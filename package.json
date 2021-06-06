@@ -10,35 +10,36 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:taro-upgrade-next.helloWorld"
+    "onCommand:taro-upgrade-next.TaroUpgradeImport",
+    "onCommand:taro-upgrade-next.TaroUpgradeConfig"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "taro-upgrade-next.TaroUpgradeImport",
-        "title": "Taro upgrade import"
+      "command": "taro-upgrade-next.TaroUpgradeImport",
+      "title": "Taro upgrade import"
       },
       {
-        "command": "taro-upgrade-next.TaroUpgradeConfig",
-        "title": "Taro upgrade config"
+      "command": "taro-upgrade-next.TaroUpgradeConfig",
+      "title": "Taro upgrade config"
       }
     ],
     "keybindings": [
       {
-        "key": "ctrl+alt+f10",
-        "mac": "cmd+alt+f10",
-        "command": "taro-upgrade-next.TaroUpgradeImport",
-        "when": "editorTextFocus"
+      "key": "ctrl+alt+f10",
+      "mac": "cmd+alt+f10",
+      "command": "taro-upgrade-next.TaroUpgradeImport",
+      "when": "editorTextFocus"
       },
       {
-        "key": "ctrl+shift+alt+f9",
-        "mac": "cmd+alt+f9",
-        "command": "taro-upgrade-next.TaroUpgradeConfig",
-        "when": "editorTextFocus"
+      "key": "ctrl+alt+f9",
+      "mac": "cmd+alt+f9",
+      "command": "taro-upgrade-next.TaroUpgradeConfig",
+      "when": "editorTextFocus"
       }
     ]
-  },
+    },
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
