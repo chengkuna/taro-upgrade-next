@@ -44,6 +44,9 @@ function startFormatImport() {
   }
 }
 
+/* 
+ 处理页面config配置
+*/
 function startFormatConfig() {
   // [a-zA-Z0-9]+.config[\s]*=[\s]*\{[\s\S\n]*?\}
   const editor = vscode.window.activeTextEditor;
@@ -58,7 +61,9 @@ function startFormatConfig() {
     // editor.document.save();
   }
 }
-
+/* 
+ 处理CSS-Module
+*/
 function startFormatCssModule() {
   const editor = vscode.window.activeTextEditor;
   if (!editor) {
@@ -107,7 +112,7 @@ function replaceImportText(document: vscode.TextDocument) {
   // const reg = /^import.*\{(.|[])*\}.*?(\@tarojs\/taro['|"])/;
   const reg = /import.*\{(.*)\}.*?(\@tarojs\/taro['|"])/;
   const result = documentText.match(reg);
-  console.log('result:', result);
+  // console.log('result:', result);
   if (result && result[1]) {
     try {
       let currentHooks = result[1].replace(/\s|\r|\n/g, '').split(',');
